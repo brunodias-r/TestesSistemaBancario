@@ -25,7 +25,7 @@ public class TesteSistemaBancario {
 					System.out.println("Digite o Id do cliente: ");
 					int idCliente = sc.nextInt();
 					Cliente cliente = gerClientes.pesquisaCliente(idCliente);
-	
+
 					if (cliente != null) {
 						System.out.println(cliente.toString());
 					} else {
@@ -37,7 +37,7 @@ public class TesteSistemaBancario {
 					System.out.println("Digite o Id da conta: ");
 					int idConta = sc.nextInt();
 					ContaCorrente conta = gerContas.pesquisaConta(idConta);
-					
+
 					if (conta != null) {
 						System.out.println(conta.toString());
 					} else {
@@ -49,8 +49,8 @@ public class TesteSistemaBancario {
 					System.out.println("Digite o Id do cliente: ");
 					int idCliente2 = sc.nextInt();
 					Cliente cliente2 = gerClientes.pesquisaCliente(idCliente2);
-					
-					if(cliente2 != null) {
+
+					if (cliente2 != null) {
 						cliente2.setAtivo(true);
 						System.out.println("cliente ativado com sucesso!");
 					} else {
@@ -62,8 +62,8 @@ public class TesteSistemaBancario {
 					System.out.println("Digite o Id do cliente: ");
 					int idCliente3 = sc.nextInt();
 					Cliente cliente3 = gerClientes.pesquisaCliente(idCliente3);
-					
-					if(cliente3 != null) {
+
+					if (cliente3 != null) {
 						cliente3.setAtivo(false);
 						System.out.println("cliente desativado com sucesso!");
 					} else {
