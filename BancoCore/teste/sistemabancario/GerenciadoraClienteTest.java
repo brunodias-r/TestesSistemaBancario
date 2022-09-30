@@ -21,7 +21,9 @@ public class GerenciadoraClienteTest {
 
 		GerenciadoraClientes gerClientes = new GerenciadoraClientes(clientes);
 
-		Cliente cliente = gerClientes.pesquisaCliente(1);
+		Cliente cliente;
+		
+		cliente = gerClientes.pesquisaCliente(1);
 
 		assertThat(cliente.getId(), is(1));
 		assertThat(cliente.getEmail(), is("clayton@gmail.com"));
@@ -71,7 +73,7 @@ public class GerenciadoraClienteTest {
 		boolean clienteRemovido01 = gerClientes.removeCliente(5);
 		
 		//Análise do resultado esperado
-		assertThat(clienteRemovido01, is(true));//Retorna que o cliente foi remvido.		
+		assertThat(clienteRemovido01, is(true));//Retorna que o cliente foi removido.		
 		assertThat(gerClientes.getClientesDoBanco().size(), is(1));//Esse método verifica o tamanho da lista e se o cliente realmente foi removido.
 		assertNull(gerClientes.pesquisaCliente(5));//Esse método verifica se o cliente excluído está na lista.
 		
@@ -109,7 +111,7 @@ public class GerenciadoraClienteTest {
 	@Test
 	public void testeValidade() throws IdadeNaoPermitidaException {
 		Cliente cliente05 = new Cliente(5, "Pedro", 47, "pedro@gmail.com", 5, true);
-		Cliente cliente06 = new Cliente(6, "Guilherme", 20, "guilherme@gmail.com", 6, true);
+		Cliente cliente06 = new Cliente(6, "Guilherme", 20, "guilherme@gmail.com", 6, false);
 		
 		List<Cliente> clientes = new ArrayList<>();
 
