@@ -10,12 +10,14 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class GerenciadoraContasTest {
+public class GerenciadoraContasTest2 {
 	
 	private GerenciadoraContas gerContas;
 	
 	@Test
 	public void testePesquisaConta() {
+		int idConta01 = 1;
+		int idConta02 = 2;
 		
 		ContaCorrente conta01 = new ContaCorrente(1,2000.00,true); 
 		ContaCorrente conta02 = new ContaCorrente(2,2500.00,true);
@@ -106,10 +108,12 @@ public class GerenciadoraContasTest {
 	
 	@Test
 	public void testeTranfereValor() {
+		int idConta01 = 1;
+		int idConta02 = 2;
 		
 		/* Montagem do cenário */		
-		ContaCorrente conta01 = new ContaCorrente(1,2000.00,true); 
-		ContaCorrente conta02 = new ContaCorrente(2,2500.00,true);
+		ContaCorrente conta01 = new ContaCorrente(idConta01,100.00,true); 
+		ContaCorrente conta02 = new ContaCorrente(idConta02,0.00,true);
 		
 		List<ContaCorrente> contas = new ArrayList<>();
 		contas.add(conta01);
@@ -119,12 +123,12 @@ public class GerenciadoraContasTest {
 		
 		/* Execução do negócio selecionado para teste */
 		//gerContas.transfereValor(1,500.00,2);
-		boolean sucesso = gerContas.transfereValor(1,500.00,2);
+		boolean sucesso = gerContas.transfereValor(idConta01,200.00,idConta02);
 		
 		/* Vrificação e Análise */
 		assertTrue(sucesso);
-		assertThat(conta01.getSaldo(), is(1500.00));
-		assertThat(conta02.getSaldo(), is(3000.00));
+		assertThat(conta01.getSaldo(), is(-100.00));
+		assertThat(conta02.getSaldo(), is(200.00));
 	}
 
 }
