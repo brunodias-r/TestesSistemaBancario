@@ -10,7 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class GerenciadoraClienteTest2 {
+public class GerenciadoraClienteTest3 {
 	
 	private GerenciadoraClientes gerClientes; 
 	private int idCliente01= 1;
@@ -122,51 +122,81 @@ public class GerenciadoraClienteTest2 {
 		assertNull(gerClientes.pesquisaCliente(idCliente02));//Esse método verifica se o cliente excluído está na lista.
 	
 	}
-
-	@Test
-	public void testeClienteAtivo() {
-		Cliente cliente05 = new Cliente(5, "Pedro", 47, "pedro@gmail.com", 5, true);
-		Cliente cliente06 = new Cliente(6, "Guilherme", 20, "guilherme@gmail.com", 6, false);
-
-		List<Cliente> clientes = new ArrayList<>();
-
-		GerenciadoraClientes gerClientes = new GerenciadoraClientes(clientes);
-
-		gerClientes.clienteAtivo(5);
-		
-		assertThat(cliente05.getId(), is(5));
-		assertThat(cliente05.getEmail(), is("pedro@gmail.com"));
-		assertThat(cliente05.getNome(), is("Pedro"));
-		
-		gerClientes.clienteAtivo(6);
-		
-		assertThat(cliente06.getId(), is(6));
-		assertThat(cliente06.getEmail(), is("guilherme@gmail.com"));
-		assertThat(cliente06.getNome(), is("Guilherme"));
-	}
 	
-	@Test
-	public void testeValidade() throws IdadeNaoPermitidaException {
-		Cliente cliente05 = new Cliente(5, "Pedro", 47, "pedro@gmail.com", 5, true);
-		Cliente cliente06 = new Cliente(6, "Guilherme", 20, "guilherme@gmail.com", 6, false);
-		
-		List<Cliente> clientes = new ArrayList<>();
-
-		GerenciadoraClientes gerClientes = new GerenciadoraClientes(clientes);
-		
-		gerClientes.validaIdade(cliente05.getIdade());
-		gerClientes.validaIdade(cliente06.getIdade());
-		
-		assertThat(cliente05.getId(), is(5));
-		assertThat(cliente05.getEmail(), is("pedro@gmail.com"));
-		assertThat(cliente05.getNome(), is("Pedro"));
-		assertThat(cliente05.getIdade(), is(47));
-				
-		assertThat(cliente06.getId(), is(6));
-		assertThat(cliente06.getEmail(), is("guilherme@gmail.com"));
-		assertThat(cliente06.getNome(), is("Guilherme"));
-		assertThat(cliente06.getIdade(), is(20));
-	}
+//	@Test
+//	public void testClienteIdadePermitida1() {
+//		Cliente cliente = new Cliente(7, "Clayton", 66, "clayton@clayton.com", 1, true);
+//		
+//		try { 
+//			
+//		} catch (IdadeNaoPermitidaException e) {
+//			
+//		}
+//	}
+//	
+//	@Test
+//	public void testClienteIdadePermitida2() {
+//		
+//	}
+//	
+//	@Test
+//	public void testClienteIdadePermitida3() {
+//		
+//	}
+//	
+//	@Test
+//	public void testClienteIdadePermitida4() {
+//		
+//	}
+//	
+//	@Test
+//	public void testClienteIdadePermitida5() {
 	
+//	}
+
+//	@Test
+//	public void testeClienteAtivo() {
+//		Cliente cliente05 = new Cliente(5, "Pedro", 47, "pedro@gmail.com", 5, true);
+//		Cliente cliente06 = new Cliente(6, "Guilherme", 20, "guilherme@gmail.com", 6, false);
+//
+//		List<Cliente> clientes = new ArrayList<>();
+//
+//		GerenciadoraClientes gerClientes = new GerenciadoraClientes(clientes);
+//
+//		gerClientes.clienteAtivo(5);
+//		
+//		assertThat(cliente05.getId(), is(5));
+//		assertThat(cliente05.getEmail(), is("pedro@gmail.com"));
+//		assertThat(cliente05.getNome(), is("Pedro"));
+//		
+//		gerClientes.clienteAtivo(6);
+//		
+//		assertThat(cliente06.getId(), is(6));
+//		assertThat(cliente06.getEmail(), is("guilherme@gmail.com"));
+//		assertThat(cliente06.getNome(), is("Guilherme"));
+//	}
+//	
+//	@Test
+//	public void testeValidade() throws IdadeNaoPermitidaException {
+//		Cliente cliente05 = new Cliente(5, "Pedro", 47, "pedro@gmail.com", 5, true);
+//		Cliente cliente06 = new Cliente(6, "Guilherme", 20, "guilherme@gmail.com", 6, false);
+//		
+//		List<Cliente> clientes = new ArrayList<>();
+//
+//		GerenciadoraClientes gerClientes = new GerenciadoraClientes(clientes);
+//		
+//		gerClientes.validaIdade(cliente05.getIdade());
+//		gerClientes.validaIdade(cliente06.getIdade());
+//		
+//		assertThat(cliente05.getId(), is(5));
+//		assertThat(cliente05.getEmail(), is("pedro@gmail.com"));
+//		assertThat(cliente05.getNome(), is("Pedro"));
+//		assertThat(cliente05.getIdade(), is(47));
+//				
+//		assertThat(cliente06.getId(), is(6));
+//		assertThat(cliente06.getEmail(), is("guilherme@gmail.com"));
+//		assertThat(cliente06.getNome(), is("Guilherme"));
+//		assertThat(cliente06.getIdade(), is(20));
+//	}
 	
 }
