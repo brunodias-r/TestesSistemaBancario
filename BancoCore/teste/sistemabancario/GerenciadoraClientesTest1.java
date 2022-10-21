@@ -7,14 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 
-public class GerenciadoraClienteTest {
+public class GerenciadoraClientesTest1 {
 	
 	@Test
 	public void testePesquisaCliente() {
-		// criando clientes
-		Cliente cliente01 = new Cliente(1, "Clayton", 47, "clayton@gmail.com", 1, true);
-		Cliente cliente02 = new Cliente(2, "Maria", 10, "maria@gmail.com", 2, true);
-
+		/* ========== Montagem do cenário ========== */
+		int idCliente01 = 1;
+		int idCliente02 = 2;
+		// criando alguns clientes
+		Cliente cliente01 = new Cliente(idCliente01, "Joao da Silva", 47, "joaodasilva@gmail.com", 1, true);
+		Cliente cliente02 = new Cliente(idCliente02, "Maria da Silva", 10, "mariadasilva@gmail.com", 1, true);
+		
 		List<Cliente> clientes = new ArrayList<>();
 		clientes.add(cliente01);
 		clientes.add(cliente02);
@@ -26,14 +29,14 @@ public class GerenciadoraClienteTest {
 		cliente = gerClientes.pesquisaCliente(1);
 
 		assertThat(cliente.getId(), is(1));
-		assertThat(cliente.getEmail(), is("clayton@gmail.com"));
-		assertThat(cliente.getNome(), is("Clayton"));
+		assertThat(cliente.getEmail(), is("joaodasilva@gmail.com"));
+		assertThat(cliente.getNome(), is("Joao da Silva"));
 		
 		cliente = gerClientes.pesquisaCliente(2);
 
 		assertThat(cliente.getId(), is(2));
-		assertThat(cliente.getEmail(), is("maria@gmail.com"));
-		assertThat(cliente.getNome(), is("Maria"));
+		assertThat(cliente.getEmail(), is("mariadasilva@gmail.com"));
+		assertThat(cliente.getNome(), is("Maria da Silva"));
 	}
 
 	@Test
@@ -59,77 +62,87 @@ public class GerenciadoraClienteTest {
 	
 	@Test
 	public void testeRemoveCliente() {
-		//Montagem do cenário
-		Cliente cliente05 = new Cliente(5, "Pedro", 40, "pedroC@gmail.com", 3, true);
-		Cliente cliente06 = new Cliente(6, "Katarina", 41, "katarinaP@gmail.com", 4, true);
+		/* ========== Montagem do cenário ========== */
+		int idCliente01 = 1;
+		int idCliente02 = 2;
+		// criando alguns clientes
+		Cliente cliente01 = new Cliente(idCliente01, "Joao da Silva", 47, "joaodasilva@gmail.com", 1, true);
+		Cliente cliente02 = new Cliente(idCliente02, "Maria da Silva", 10, "mariadasilva@gmail.com", 1, true);
 		
 		List<Cliente> clientes = new ArrayList<>();
-		clientes.add(cliente05);
-		clientes.add(cliente06);
+		clientes.add(cliente01);
+		clientes.add(cliente02);
 		
 		GerenciadoraClientes gerClientes = new GerenciadoraClientes(clientes);
+
+		gerClientes = new GerenciadoraClientes(clientes);
 		
-		//Fase de execução
-		boolean clienteRemovido01 = gerClientes.removeCliente(5);
+		/* ========== Execução ========== */
+		boolean clienteRemovido1 = gerClientes.removeCliente(idCliente01);
 		
-		//Análise do resultado esperado
-		assertThat(clienteRemovido01, is(true));//Retorna que o cliente foi removido.		
-		assertThat(gerClientes.getClientesDoBanco().size(), is(1));//Esse método verifica o tamanho da lista e se o cliente realmente foi removido.
-		assertNull(gerClientes.pesquisaCliente(5));//Esse método verifica se o cliente excluído está na lista.
+		/* ========== Verificações ========== */
+		assertThat(clienteRemovido1, is(true));
+		assertThat(gerClientes.getClientesDoBanco().size(), is(1));
+		assertNull(gerClientes.pesquisaCliente(idCliente01));
 		
-		//Fase de execução
-		boolean clienteRemovido02 = gerClientes.removeCliente(6);
+		boolean clienteRemovido2 = gerClientes.removeCliente(idCliente02);
 		
-		//Análise do resultado esperado
-		assertThat(clienteRemovido02, is(true));//Retorna que o cliente foi removido.		
-		assertThat(gerClientes.getClientesDoBanco().size(), is(0));//Esse método verifica o tamanho da lista e se o cliente realmente foi removido.
-		assertNull(gerClientes.pesquisaCliente(6));//Esse método verifica se o cliente excluído está na lista.
+		/* ========== Verificações ========== */
+		assertThat(clienteRemovido2, is(true));
+		assertThat(gerClientes.getClientesDoBanco().size(), is(0));
+		assertNull(gerClientes.pesquisaCliente(idCliente02));	
 	}
+	
 
 	@Test
 	public void testeClienteAtivo() {
-		Cliente cliente05 = new Cliente(5, "Pedro", 47, "pedro@gmail.com", 5, true);
-		Cliente cliente06 = new Cliente(6, "Guilherme", 20, "guilherme@gmail.com", 6, false);
-
+		/* ========== Montagem do cenário ========== */
+		int idCliente01 = 1;
+		int idCliente02 = 2;
+		// criando alguns clientes
+		Cliente cliente01 = new Cliente(idCliente01, "Joao da Silva", 47, "joaodasilva@gmail.com", 1, true);
+		Cliente cliente02 = new Cliente(idCliente02, "Maria da Silva", 10, "mariadasilva@gmail.com", 1, false);
+		
 		List<Cliente> clientes = new ArrayList<>();
-
+		clientes.add(cliente01);
+		clientes.add(cliente02);
+		
 		GerenciadoraClientes gerClientes = new GerenciadoraClientes(clientes);
 
-		gerClientes.clienteAtivo(5);
+		boolean clienteAtivo1 = gerClientes.clienteAtivo(idCliente01);
+
+		assertThat(clienteAtivo1, is(true));
+		assertThat(gerClientes.clienteAtivo(idCliente01), is(true));
 		
-		assertThat(cliente05.getId(), is(5));
-		assertThat(cliente05.getEmail(), is("pedro@gmail.com"));
-		assertThat(cliente05.getNome(), is("Pedro"));
-		
-		gerClientes.clienteAtivo(6);
-		
-		assertThat(cliente06.getId(), is(6));
-		assertThat(cliente06.getEmail(), is("guilherme@gmail.com"));
-		assertThat(cliente06.getNome(), is("Guilherme"));
+		boolean clienteAtivo2 = gerClientes.clienteAtivo(idCliente02);
+
+		assertThat(clienteAtivo2, is(false));
+		assertThat(gerClientes.clienteAtivo(idCliente02), is(false));
+
 	}
 	
 	@Test
 	public void testeValidade() throws IdadeNaoPermitidaException {
-		Cliente cliente05 = new Cliente(5, "Pedro", 47, "pedro@gmail.com", 5, true);
-		Cliente cliente06 = new Cliente(6, "Guilherme", 20, "guilherme@gmail.com", 6, false);
+		/* ========== Montagem do cen�rio ========== */
+		int idCliente01 = 1;
+		int idCliente02 = 2;
+		// criando alguns clientes
+		Cliente cliente01 = new Cliente(idCliente01, "Joao da Silva", 47, "joaodasilva@gmail.com", 1, true);
+		Cliente cliente02 = new Cliente(idCliente02, "Maria da Silva", 10, "mariadasilva@gmail.com", 1, true);
 		
 		List<Cliente> clientes = new ArrayList<>();
-
+		clientes.add(cliente01);
+		clientes.add(cliente02);
+		
 		GerenciadoraClientes gerClientes = new GerenciadoraClientes(clientes);
 		
-		gerClientes.validaIdade(cliente05.getIdade());
-		gerClientes.validaIdade(cliente06.getIdade());
+		gerClientes.validaIdade(cliente01.getIdade());
 		
-		assertThat(cliente05.getId(), is(5));
-		assertThat(cliente05.getEmail(), is("pedro@gmail.com"));
-		assertThat(cliente05.getNome(), is("Pedro"));
-		assertThat(cliente05.getIdade(), is(47));
+		assertThat(cliente01.getId(), is(1));
+		assertThat(cliente01.getEmail(), is("joaodasilva@gmail.com"));
+		assertThat(cliente01.getNome(), is("Joao da Silva"));
+		assertThat(cliente01.getIdade(), is(47));
 				
-		assertThat(cliente06.getId(), is(6));
-		assertThat(cliente06.getEmail(), is("guilherme@gmail.com"));
-		assertThat(cliente06.getNome(), is("Guilherme"));
-		assertThat(cliente06.getIdade(), is(20));
 	}
-	
-	
+		
 }

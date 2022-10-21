@@ -85,6 +85,14 @@ public class GerenciadoraContas {
 	}
 	
 	/**
+	 * Adicionado por Bruno.
+	 * Limpa a lista de contas, ou seja, remove todas elas. 
+	 */
+	public void limpa() {
+		this.contasDoBanco.clear();
+	}
+	
+	/**
 	 * Transfere um determinado valor de uma conta Origem para uma conta Destino.
 	 * Caso nao haja saldo suficiente, o valor nao sera transferido.
 	 * 
@@ -100,11 +108,11 @@ public class GerenciadoraContas {
 		ContaCorrente contaOrigem = pesquisaConta(idContaOrigem);
 		ContaCorrente contaDestino = pesquisaConta(idContaDestino);
 		
-//		if(contaOrigem.getSaldo() >= valor){
+		if(contaOrigem.getSaldo() >= valor){
 			contaDestino.setSaldo(contaDestino.getSaldo() + valor);
 			contaOrigem.setSaldo(contaOrigem.getSaldo() - valor);
 			sucesso = true;
-//		}
+		}
 	
 		return sucesso;
 	}
