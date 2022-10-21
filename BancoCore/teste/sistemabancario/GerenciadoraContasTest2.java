@@ -1,91 +1,68 @@
 package sistemabancario;
 
 import static org.hamcrest.CoreMatchers.is;
-<<<<<<< HEAD
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-=======
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
->>>>>>> refs/remotes/origin/main
 
 import java.util.ArrayList;
 import java.util.List;
-
-<<<<<<< HEAD
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class GerenciadoraContasTest2 {
 
-	private GerenciadoraContas gerContas;
+	private GerenciadoraClientes gerClientes;
 
-	private int idConta01 = 1;
-	private int idConta02 = 2;
+	private int idCliente01 = 1;
+	private int idCliente02 = 2;
 
 	@Before
 	public void setUp() {
 		// ************* Montagem do cenário global **********//
-		ContaCorrente conta01 = new ContaCorrente(idConta01, 200, true);
-		ContaCorrente conta02 = new ContaCorrente(idConta02, 0, true);
+		Cliente cliente01 = new Cliente(idCliente01, "Joao da Silva", 47, "joaodasilva@gmail.com", 1, true);
+		Cliente cliente02 = new Cliente(idCliente02, "Maria da Silva", 10, "mariadasilva@gmail.com", 1, true);
 
-=======
-import org.junit.Test;
+		List<Cliente> clientesDoBanco = new ArrayList<>();
+		clientesDoBanco.add(cliente01);
+		clientesDoBanco.add(cliente02);
 
-public class GerenciadoraContasTest2 {
-	
-	private GerenciadoraContas gerContas;
-	
-	@Test
-	public void testePesquisaConta() {
-		int idConta01 = 1;
-		int idConta02 = 2;
-		
-		ContaCorrente conta01 = new ContaCorrente(1,2000.00,true); 
-		ContaCorrente conta02 = new ContaCorrente(2,2500.00,true);
->>>>>>> refs/remotes/origin/main
-		List<ContaCorrente> contas = new ArrayList<>();
-		contas.add(conta01);
-		contas.add(conta02);
-
-		gerContas = new GerenciadoraContas(contas);
-<<<<<<< HEAD
+		gerClientes = new GerenciadoraClientes(clientesDoBanco);
 	}
 
 	@After
 	public void tearDown() {
 		// ************* Desmontagem do cenário global **********//
-		gerContas.limpa();
+		gerClientes.limpa();
 	}
+
+	private GerenciadoraContas gerContas;
+
 
 	@Test
 	public void testePesquisaConta() {
 
-//		// ************* Montar o cenário *************//
-//		int idConta01 = 1;
-//		int idConta02 = 2;
-//
-//		ContaCorrente conta01 = new ContaCorrente(idConta01, 200, true);
-//		ContaCorrente conta02 = new ContaCorrente(idConta02, 0, true);
-//
-//		List<ContaCorrente> contas = new ArrayList<>();
-//		contas.add(conta01);
-//		contas.add(conta02);
-//
-//		GerenciadoraContas gerContas = new GerenciadoraContas(contas);
+		// ************* Montar o cenário *************//
+		int idConta01 = 1;
+		int idConta02 = 2;
+
+		ContaCorrente conta01 = new ContaCorrente(idConta01, 200, true);
+		ContaCorrente conta02 = new ContaCorrente(idConta02, 0, true);
+
+		List<ContaCorrente> contas = new ArrayList<>();
+		contas.add(conta01);
+		contas.add(conta02);
+
+		GerenciadoraContas gerContas = new GerenciadoraContas(contas);
 
 		// Execução
-		ContaCorrente conta01 = gerContas.pesquisaConta(idConta01);
-		ContaCorrente conta02 = gerContas.pesquisaConta(idConta02);
+		gerContas.pesquisaConta(idConta01);
+		gerContas.pesquisaConta(idConta02);
 
 		// Análise do resultado esperado
 		assertThat(conta01.getId(), is(idConta01));
-
 		assertThat(conta02.getId(), is(idConta02));
 
 	}
@@ -107,62 +84,32 @@ public class GerenciadoraContasTest2 {
 		GerenciadoraContas gerContas = new GerenciadoraContas(contas);
 
 		gerContas.adicionaConta(conta01);
+		gerContas.adicionaConta(conta02);
+
 		assertThat(conta01.getId(), is(1));
 		assertThat(conta01.getSaldo(), is(200.00));
-=======
 
-		ContaCorrente conta;
-		
-		conta = gerContas.pesquisaConta(1); 	
-		assertThat(conta.getId(), is(1));
-		assertThat(conta.getSaldo(), is(2000.00));
-
-		conta = gerContas.pesquisaConta(2); 	
-		assertThat(conta.getId(), is(2));
-		assertThat(conta.getSaldo(), is(2500.00));
-
-	}
-	
-	@Test
-	public void testeAdicionaConta() {
-		
-		ContaCorrente conta01 = new ContaCorrente(1,2000.00,true); 
-		ContaCorrente conta02 = new ContaCorrente(2,2500.00,true);
-		List<ContaCorrente> contas = new ArrayList<>();
-		contas.add(conta01);
-		contas.add(conta02);
-		
-		gerContas = new GerenciadoraContas(contas);
-
-		gerContas.adicionaConta(conta01);
-		assertThat(conta01.getId(), is(1));
-		assertThat(conta01.getSaldo(), is(2000.00));
->>>>>>> refs/remotes/origin/main
-		assertThat(conta01.isAtiva(), is(true));
-
-		gerContas.adicionaConta(conta02);
 		assertThat(conta02.getId(), is(2));
-<<<<<<< HEAD
 		assertThat(conta02.getSaldo(), is(0.00));
-		assertThat(conta02.isAtiva(), is(true));
 
 	}
+
 
 	@Test
 	public void testeRemoveConta() {
 
-//		/* cenario customizado para esse teste */
-//		int idConta01 = 1;
-//		int idConta02 = 2;
-//
-//		ContaCorrente conta01 = new ContaCorrente(idConta01, 200, true);
-//		ContaCorrente conta02 = new ContaCorrente(idConta02, 0, true);
-//
-//		List<ContaCorrente> contas = new ArrayList<>();
-//		contas.add(conta01);
-//		contas.add(conta02);
-//
-//		GerenciadoraContas gerContas = new GerenciadoraContas(contas);
+		/* cenario customizado para esse teste */
+		int idConta01 = 1;
+		int idConta02 = 2;
+
+		ContaCorrente conta01 = new ContaCorrente(idConta01, 200, true);
+		ContaCorrente conta02 = new ContaCorrente(idConta02, 0, true);
+
+		List<ContaCorrente> contas = new ArrayList<>();
+		contas.add(conta01);
+		contas.add(conta02);
+
+		GerenciadoraContas gerContas = new GerenciadoraContas(contas);
 
 		boolean contaRemovida01 = gerContas.removeConta(idConta01);
 		assertThat(contaRemovida01, is(false));
@@ -180,24 +127,26 @@ public class GerenciadoraContasTest2 {
 	public void testeContaAtiva() {
 
 //		/* cenario customizado para esse teste */
-//		int idConta01 = 1;
-//		int idConta02 = 2;
-//
-//		ContaCorrente conta01 = new ContaCorrente(idConta01, 200, true);
-//		ContaCorrente conta02 = new ContaCorrente(idConta02, 0, true);
-//
-//		List<ContaCorrente> contas = new ArrayList<>();
-//		contas.add(conta01);
-//		contas.add(conta02);
-//
-//		GerenciadoraContas gerContas = new GerenciadoraContas(contas);
+		int idConta01 = 1;
+		int idConta02 = 2;
 
+		ContaCorrente conta01 = new ContaCorrente(idConta01, 200, true);
+		ContaCorrente conta02 = new ContaCorrente(idConta02, 0, true);
+
+		List<ContaCorrente> contas = new ArrayList<>();
+		contas.add(conta01);
+		contas.add(conta02);
+
+		GerenciadoraContas gerContas = new GerenciadoraContas(contas);
+		
+		/*Execução*/
 		boolean contaAtivo01 = gerContas.contaAtiva(idConta01);
+		boolean contaAtivo02 = gerContas.contaAtiva(idConta02);
+
+		/*Análise*/
 
 		assertThat(contaAtivo01, is(true));
 		assertThat(gerContas.contaAtiva(idConta01), is(true));
-
-		boolean contaAtivo02 = gerContas.contaAtiva(idConta02);
 
 		assertThat(contaAtivo02, is(true));
 		assertThat(gerContas.contaAtiva(idConta02), is(true));
@@ -207,7 +156,7 @@ public class GerenciadoraContasTest2 {
 	@Test
 	public void testeTranfereValor1() {
 
-		/* cenario customizado para esse teste */
+		/* cenário customizado para esse teste */
 		int idConta01 = 1;
 		int idConta02 = 2;
 
@@ -306,7 +255,7 @@ public class GerenciadoraContasTest2 {
 //		assertThat(conta02.getSaldo(), is(200.0));
 //
 //	}
-	
+
 	@Test
 	public void testTransfereValor3() {
 
@@ -383,194 +332,50 @@ public class GerenciadoraContasTest2 {
 			assertThat(e.getMessage(), is("Saldo insuficiente para realizar a tranferência."));
 		}
 
-=======
-		assertThat(conta02.getSaldo(), is(2500.00));
-		assertThat(conta02.isAtiva(), is(true));
+	}
 
-	}
-	
-	@Test
-	public void testeRemoveConta() {
-		
-		ContaCorrente conta01 = new ContaCorrente(1,2000.00,true); 
-		ContaCorrente conta02 = new ContaCorrente(2,2600.00,true);
-		List<ContaCorrente> contas = new ArrayList<>();
-		contas.add(conta01);
-		contas.add(conta02);
-		
-		gerContas = new GerenciadoraContas(contas);
-		
-		boolean contaRemovida01 = gerContas.removeConta(1);
-		assertThat(contaRemovida01, is(false));
-		assertThat(gerContas.getContasDoBanco().size(), is(1));
-		assertNull(gerContas.pesquisaConta(1));
-		
-		boolean contaRemovida02 = gerContas.removeConta(2);
-		assertThat(contaRemovida02, is(false));
-		assertThat(gerContas.getContasDoBanco().size(), is(0));
-		assertNull(gerContas.pesquisaConta(2));
-		
-	}
-	
-	@Test
-	public void testeContaAtiva() {
-		
-		ContaCorrente conta01 = new ContaCorrente(3022,2000.00,true); 
-		ContaCorrente conta02 = new ContaCorrente(3023,2600.00,true);
-		List<ContaCorrente> contas = new ArrayList<>();
-		contas.add(conta01);
-		contas.add(conta02);
-		
-		gerContas = new GerenciadoraContas(contas);
-		
-		gerContas.contaAtiva(3022);
-		assertThat(conta01.isAtiva(), is(true));//* Teste de integridade *//
-		assertThat(conta01.getId(), is(3022));//* Teste de integridade *//
-		
-		gerContas.contaAtiva(3023);
-		assertThat(conta02.isAtiva(), is(true));//* Teste de integridade *//
-		assertThat(conta02.getId(), is(3023));//* Teste de integridade *//
-
-	}
-	
-	@Test
-	public void testeTranfereValor1() {
-		/* Teste quando o saldo é suficiente */
-		//*************** Montagem do senário ***************//
-		int idConta01 = 1;
-		int idConta02 = 2;
-		
-		/* Montagem do cenário */		
-		ContaCorrente conta01 = new ContaCorrente(idConta01,200.00,true); 
-		ContaCorrente conta02 = new ContaCorrente(idConta02,0.00,true);
-		
-		List<ContaCorrente> contas = new ArrayList<>();
-		contas.add(conta01);
-		contas.add(conta02);
-		
-		GerenciadoraContas gerContas = new GerenciadoraContas(contas);
-		
-		/* Execução do negócio selecionado para teste */
-		//gerContas.transfereValor(1,500.00,2);
-		boolean sucesso = gerContas.transfereValor(idConta01,100.00,idConta02);
-		
-		/* Vrificação e Análise */
-		assertTrue(sucesso);
-		assertThat(conta01.getSaldo(), is(100.00));//* Teste de integridade *//
-		assertThat(conta02.getSaldo(), is(100.00));//* Teste de integridade *//
-	}
-	
-	@Test
-	public void testeTranfereValor2() {
-		/* Teste quando o saldo é insuficiente */
-		//*************** Montagem do senário ***************//
-
-		int idConta01 = 1;
-		int idConta02 = 2;
-		
-		/* Montagem do cenário */		
-		ContaCorrente conta01 = new ContaCorrente(idConta01,100.00,true); 
-		ContaCorrente conta02 = new ContaCorrente(idConta02,0.00,true);
-		
-		List<ContaCorrente> contas = new ArrayList<>();
-		contas.add(conta01);
-		contas.add(conta02);
-		
-		GerenciadoraContas gerContas = new GerenciadoraContas(contas);
-		
-		/* Execução do negócio selecionado para teste */
-		//gerContas.transfereValor(1,500.00,2);
-		boolean sucesso = gerContas.transfereValor(idConta01,200.00,idConta02);
-		
-		/* Vrificação e Análise */
-		assertTrue(sucesso);
-		assertThat(conta01.getSaldo(), is(-100.00));//* Teste de integridade *//
-		assertThat(conta02.getSaldo(), is(200.00));//* Teste de integridade *//
-	}
-	
-	@Test
-	public void testeTranfereValor3() {
-		/* Teste quando o saldo é insuficiente */
-		//*************** Montagem do senário ***************//
-
-		int idConta01 = 1;
-		int idConta02 = 2;
-		
-		/* Montagem do cenário */		
-		ContaCorrente conta01 = new ContaCorrente(idConta01,-100.00,true); 
-		ContaCorrente conta02 = new ContaCorrente(idConta02,0.00,true);
-		
-		List<ContaCorrente> contas = new ArrayList<>();
-		contas.add(conta01);
-		contas.add(conta02);
-		
-		GerenciadoraContas gerContas = new GerenciadoraContas(contas);
-		
-		/* Execução do negócio selecionado para teste */
-		//gerContas.transfereValor(1,500.00,2);
-		boolean sucesso = gerContas.transfereValor(idConta01,200.00,idConta02);
-		
-		/* Vrificação e Análise */
-		assertTrue(sucesso);//* Teste de completude *//
-		assertThat(conta01.getSaldo(), is(-300.00));//* Teste de integridade *//
-		assertThat(conta02.getSaldo(), is(200.00));//* Teste de integridade *//
-	}
-	
-	@Test
-	public void testeTranfereValor4() {
-		/* Teste quando o saldo é insuficiente */
-		//*************** Montagem do senário ***************//
-
-		int idConta01 = 1;
-		int idConta02 = 2;
-		
-		/* Montagem do cenário */		
-		ContaCorrente conta01 = new ContaCorrente(idConta01,-100.00,true); 
-		ContaCorrente conta02 = new ContaCorrente(idConta02,-100.00,true);
-		
-		List<ContaCorrente> contas = new ArrayList<>();
-		contas.add(conta01);
-		contas.add(conta02);
-		
-		GerenciadoraContas gerContas = new GerenciadoraContas(contas);
-		
-		/* Execução do negócio selecionado para teste */
-		//gerContas.transfereValor(1,500.00,2);
-		boolean sucesso = gerContas.transfereValor(idConta01,200.00,idConta02);
-		
-		/* Vrificação e Análise */
-		assertTrue(sucesso);//* Teste de completude *//
-		assertThat(conta01.getSaldo(), is(-300.00));//* Teste de integridade *//
-		assertThat(conta02.getSaldo(), is(100.00));//* Teste de integridade *//
-	}
-	
-	@Test
-	public void testeTranfereValor5() {
-		/* Teste quando o saldo é insuficiente */
-		//*************** Montagem do senário ***************//
-
-		int idConta01 = 1;
-		int idConta02 = 2;
-		
-		/* Montagem do cenário */		
-		ContaCorrente conta01 = new ContaCorrente(idConta01,-100.00,true); 
-		ContaCorrente conta02 = new ContaCorrente(idConta02,-100.00,true);
-		
-		List<ContaCorrente> contas = new ArrayList<>();
-		contas.add(conta01);
-		contas.add(conta02);
-		
-		GerenciadoraContas gerContas = new GerenciadoraContas(contas);
-		
-		/* Execução do negócio selecionado para teste */
-		//gerContas.transfereValor(1,500.00,2);
-		boolean sucesso = gerContas.transfereValor(idConta01,200.00,idConta02);
-		
-		/* Vrificação e Análise */
-		assertTrue(sucesso);//* Teste de completude *//
-		assertThat(conta01.getSaldo(), is(-300.00));//* Teste de integridade *//
-		assertThat(conta02.getSaldo(), is(100.00));//* Teste de integridade *//
->>>>>>> refs/remotes/origin/main
-	}
+//	@Test
+//	public void testeRemoveConta() {
+//
+//		ContaCorrente conta01 = new ContaCorrente(1, 2000.00, true);
+//		ContaCorrente conta02 = new ContaCorrente(2, 2600.00, true);
+//		List<ContaCorrente> contas = new ArrayList<>();
+//		contas.add(conta01);
+//		contas.add(conta02);
+//
+//		gerContas = new GerenciadoraContas(contas);
+//
+//		boolean contaRemovida01 = gerContas.removeConta(1);
+//		assertThat(contaRemovida01, is(false));
+//		assertThat(gerContas.getContasDoBanco().size(), is(1));
+//		assertNull(gerContas.pesquisaConta(1));
+//
+//		boolean contaRemovida02 = gerContas.removeConta(2);
+//		assertThat(contaRemovida02, is(false));
+//		assertThat(gerContas.getContasDoBanco().size(), is(0));
+//		assertNull(gerContas.pesquisaConta(2));
+//
+//	}
+//
+//	@Test
+//	public void testeContaAtiva() {
+//
+//		ContaCorrente conta01 = new ContaCorrente(3022, 2000.00, true);
+//		ContaCorrente conta02 = new ContaCorrente(3023, 2600.00, true);
+//		List<ContaCorrente> contas = new ArrayList<>();
+//		contas.add(conta01);
+//		contas.add(conta02);
+//
+//		gerContas = new GerenciadoraContas(contas);
+//
+//		gerContas.contaAtiva(3022);
+//		assertThat(conta01.isAtiva(), is(true));// * Teste de integridade *//
+//		assertThat(conta01.getId(), is(3022));// * Teste de integridade *//
+//
+//		gerContas.contaAtiva(3023);
+//		assertThat(conta02.isAtiva(), is(true));// * Teste de integridade *//
+//		assertThat(conta02.getId(), is(3023));// * Teste de integridade *//
+//
+//	}
 
 }
